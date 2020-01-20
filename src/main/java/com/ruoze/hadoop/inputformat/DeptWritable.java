@@ -60,14 +60,18 @@ public class DeptWritable implements DBWritable, Writable {
 
     @Override
     public void write(DataOutput out) throws IOException {
-        //out.writeUTF();
-
+        out.writeUTF(this.pName);
+        out.writeUTF(this.pCode);
+        out.writeUTF(this.deptCode);
+        out.writeUTF(this.city);
     }
 
     @Override
     public void readFields(DataInput in) throws IOException {
-
-
+        pName=in.readUTF();
+        pCode=in.readUTF();
+        deptCode=in.readUTF();
+        city=in.readUTF();
     }
 
     @Override
@@ -84,5 +88,13 @@ public class DeptWritable implements DBWritable, Writable {
         this.pCode=resultSet.getString(2);
         this.deptCode=resultSet.getString(3);
         this.city=resultSet.getString(4);
+    }
+
+    @Override
+    public String toString() {
+        return pName+"\t"+
+                pCode+"\t"+
+                deptCode+"\t"+
+                city;
     }
 }
